@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kuku FM Interactive Audio Companion Prototype</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background: #0056b3;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .chat-window {
+      height: 400px;
+      padding: 20px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ccc;
+    }
+    .chat-message {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .user-message {
+      background: #d1e7dd;
+      text-align: right;
+    }
+    .ai-message {
+      background: #e2e3e5;
+      text-align: left;
+    }
+    .input-section {
+      display: flex;
+      padding: 20px;
+    }
+    .input-section input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .input-section button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      border: none;
+      background: #0056b3;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .input-section button:hover {
+      background: #004494;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>My Companion</h1>
+    <p>Interactive Audio Companion for Kuku FM</p>
+  </div>
+  
+  <div class="container">
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-message ai-message">
+        <strong>Companion:</strong> Hello! I'm your audio companion. How can I assist you today?
+      </div>
+    </div>
+    <div class="input-section">
+      <input type="text" id="userInput" placeholder="Type your question or message here..." />
+      <button onclick="sendMessage()">Ask</button>
+    </div>
+  </div>
+  
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const chatWindow = document.getElementById('chatWindow');
+      const userText = input.value.trim();
+      if (userText === "") return;
+      
+      const userMessageDiv = document.createElement('div');
+      userMessageDiv.classList.add('chat-message', 'user-message');
+      userMessageDiv.innerHTML = `<strong>You:</strong> ${userText}`;
+      chatWindow.appendChild(userMessageDiv);
+      
+      input.value = "";
+      
+      setTimeout(() => {
+        const aiMessageDiv = document.createElement('div');
+        aiMessageDiv.classList.add('chat-message', 'ai-message');
+        aiMessageDiv.innerHTML = `<strong>Companion:</strong> That's an interesting question! Let me think about it.`;
+        chatWindow.appendChild(aiMessageDiv);
+        
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+      }, 800);
+      
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+  </script>
+</body>
+</html>
